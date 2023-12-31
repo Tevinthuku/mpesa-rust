@@ -178,7 +178,7 @@ impl<'mpesa> Mpesa {
 
     #[cfg(feature = "bill_manager")]
     #[doc = include_str!("../docs/client/bill_manager/onboard.md")]
-    pub fn onboard(&'mpesa self) -> OnboardBuilder<'mpesa, Env> {
+    pub fn onboard(&'mpesa self) -> OnboardBuilder<'mpesa> {
         OnboardBuilder::new(self)
     }
 
