@@ -172,7 +172,7 @@ impl<'mpesa> Mpesa {
 
     #[cfg(feature = "b2b")]
     #[doc = include_str!("../docs/client/b2b.md")]
-    pub fn b2b(&'mpesa self, initiator_name: &'mpesa str) -> B2bBuilder<'mpesa, Env> {
+    pub fn b2b(&'mpesa self, initiator_name: &'mpesa str) -> B2bBuilder<'mpesa> {
         B2bBuilder::new(self, initiator_name)
     }
 
