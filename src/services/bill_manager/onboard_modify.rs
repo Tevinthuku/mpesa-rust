@@ -59,7 +59,7 @@ pub struct OnboardModifyBuilder<'mpesa> {
 
 impl<'mpesa> OnboardModifyBuilder<'mpesa> {
     /// Creates a new Bill Manager Onboard Modify builder
-    pub fn new(client: &'mpesa Mpesa<Env>) -> OnboardModifyBuilder<'mpesa> {
+    pub fn new(client: &'mpesa Mpesa) -> OnboardModifyBuilder<'mpesa> {
         OnboardModifyBuilder {
             client,
             callback_url: None,

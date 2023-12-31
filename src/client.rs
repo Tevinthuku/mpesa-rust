@@ -184,25 +184,25 @@ impl<'mpesa> Mpesa {
 
     #[cfg(feature = "bill_manager")]
     #[doc = include_str!("../docs/client/bill_manager/onboard_modify.md")]
-    pub fn onboard_modify(&'mpesa self) -> OnboardModifyBuilder<'mpesa, Env> {
+    pub fn onboard_modify(&'mpesa self) -> OnboardModifyBuilder<'mpesa> {
         OnboardModifyBuilder::new(self)
     }
 
     #[cfg(feature = "bill_manager")]
     #[doc = include_str!("../docs/client/bill_manager/bulk_invoice.md")]
-    pub fn bulk_invoice(&'mpesa self) -> BulkInvoiceBuilder<'mpesa, Env> {
+    pub fn bulk_invoice(&'mpesa self) -> BulkInvoiceBuilder<'mpesa> {
         BulkInvoiceBuilder::new(self)
     }
 
     #[cfg(feature = "bill_manager")]
     #[doc = include_str!("../docs/client/bill_manager/single_invoice.md")]
-    pub fn single_invoice(&'mpesa self) -> SingleInvoiceBuilder<'mpesa, Env> {
+    pub fn single_invoice(&'mpesa self) -> SingleInvoiceBuilder<'mpesa> {
         SingleInvoiceBuilder::new(self)
     }
 
     #[cfg(feature = "bill_manager")]
     #[doc = include_str!("../docs/client/bill_manager/reconciliation.md")]
-    pub fn reconciliation(&'mpesa self) -> ReconciliationBuilder<'mpesa, Env> {
+    pub fn reconciliation(&'mpesa self) -> ReconciliationBuilder<'mpesa> {
         ReconciliationBuilder::new(self)
     }
 
@@ -214,13 +214,13 @@ impl<'mpesa> Mpesa {
 
     #[cfg(feature = "c2b_register")]
     #[doc = include_str!("../docs/client/c2b_register.md")]
-    pub fn c2b_register(&'mpesa self) -> C2bRegisterBuilder<'mpesa, Env> {
+    pub fn c2b_register(&'mpesa self) -> C2bRegisterBuilder<'mpesa> {
         C2bRegisterBuilder::new(self)
     }
 
     #[cfg(feature = "c2b_simulate")]
     #[doc = include_str!("../docs/client/c2b_simulate.md")]
-    pub fn c2b_simulate(&'mpesa self) -> C2bSimulateBuilder<'mpesa, Env> {
+    pub fn c2b_simulate(&'mpesa self) -> C2bSimulateBuilder<'mpesa> {
         C2bSimulateBuilder::new(self)
     }
 
@@ -229,7 +229,7 @@ impl<'mpesa> Mpesa {
     pub fn account_balance(
         &'mpesa self,
         initiator_name: &'mpesa str,
-    ) -> AccountBalanceBuilder<'mpesa, Env> {
+    ) -> AccountBalanceBuilder<'mpesa> {
         AccountBalanceBuilder::new(self, initiator_name)
     }
 
@@ -238,7 +238,7 @@ impl<'mpesa> Mpesa {
     pub fn express_request(
         &'mpesa self,
         business_short_code: &'mpesa str,
-    ) -> MpesaExpressRequestBuilder<'mpesa, Env> {
+    ) -> MpesaExpressRequestBuilder<'mpesa> {
         MpesaExpressRequestBuilder::new(self, business_short_code)
     }
 
@@ -247,7 +247,7 @@ impl<'mpesa> Mpesa {
     pub fn transaction_reversal(
         &'mpesa self,
         initiator_name: &'mpesa str,
-    ) -> TransactionReversalBuilder<'mpesa, Env> {
+    ) -> TransactionReversalBuilder<'mpesa> {
         TransactionReversalBuilder::new(self, initiator_name)
     }
 
@@ -256,13 +256,13 @@ impl<'mpesa> Mpesa {
     pub fn transaction_status(
         &'mpesa self,
         initiator_name: &'mpesa str,
-    ) -> TransactionStatusBuilder<'mpesa, Env> {
+    ) -> TransactionStatusBuilder<'mpesa> {
         TransactionStatusBuilder::new(self, initiator_name)
     }
 
     #[cfg(feature = "dynamic_qr")]
     #[doc = include_str!("../docs/client/dynamic_qr.md")]
-    pub fn dynamic_qr(&'mpesa self) -> DynamicQRBuilder<'mpesa, Env> {
+    pub fn dynamic_qr(&'mpesa self) -> DynamicQRBuilder<'mpesa> {
         DynamicQR::builder(self)
     }
 
@@ -321,9 +321,9 @@ impl<'mpesa> Mpesa {
     }
 }
 
-pub struct Request<'a, Body: Serialize + Send> {
+pub struct Request<Body: Serialize + Send> {
     pub method: reqwest::Method,
-    pub path: &'a str,
+    pub path: &'static str,
     pub body: Body,
 }
 

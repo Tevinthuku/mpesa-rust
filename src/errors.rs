@@ -11,7 +11,7 @@ pub enum MpesaError {
     Service(ResponseError),
     #[error("An error has occured while performing the http request")]
     NetworkError(#[from] reqwest::Error),
-    #[error("An error has occured while serializig/ deserializing")]
+    #[error("An error has occured while serializing/ deserializing")]
     ParseError(#[from] serde_json::Error),
     #[error("An error has occured while retreiving an environmental variable")]
     EnvironmentalVariableError(#[from] VarError),

@@ -41,8 +41,8 @@ pub struct TransactionStatusResponse {
 }
 
 #[derive(Debug)]
-pub struct TransactionStatusBuilder<'mpesa, Env: ApiEnvironment> {
-    client: &'mpesa Mpesa<Env>,
+pub struct TransactionStatusBuilder<'mpesa> {
+    client: &'mpesa Mpesa,
     initiator: &'mpesa str,
     command_id: Option<CommandId>,
     transaction_id: Option<&'mpesa str>,
@@ -54,12 +54,9 @@ pub struct TransactionStatusBuilder<'mpesa, Env: ApiEnvironment> {
     occasion: Option<&'mpesa str>,
 }
 
-impl<'mpesa, Env: ApiEnvironment> TransactionStatusBuilder<'mpesa, Env> {
+impl<'mpesa, Env: ApiEnvironment> TransactionStatusBuilder<'mpesa> {
     /// Creates new `TransactionStatusBuilder`
-    pub fn new(
-        client: &'mpesa Mpesa<Env>,
-        initiator: &'mpesa str,
-    ) -> TransactionStatusBuilder<'mpesa, Env> {
+    pub fn new(client: &'mpesa Mpesa, initiator: &'mpesa str) -> TransactionStatusBuilder<'mpesa> {
         TransactionStatusBuilder {
             client,
             initiator,

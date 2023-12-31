@@ -20,14 +20,14 @@ pub struct BulkInvoiceResponse {
 }
 
 #[derive(Debug)]
-pub struct BulkInvoiceBuilder<'mpesa, Env: ApiEnvironment> {
+pub struct BulkInvoiceBuilder<'mpesa> {
     client: &'mpesa Mpesa<Env>,
     invoices: Vec<Invoice<'mpesa>>,
 }
 
-impl<'mpesa, Env: ApiEnvironment> BulkInvoiceBuilder<'mpesa, Env> {
+impl<'mpesa, Env: ApiEnvironment> BulkInvoiceBuilder<'mpesa> {
     /// Creates a new Bill Manager Bulk Invoice builder
-    pub fn new(client: &'mpesa Mpesa<Env>) -> BulkInvoiceBuilder<'mpesa, Env> {
+    pub fn new(client: &'mpesa Mpesa) -> BulkInvoiceBuilder<'mpesa> {
         BulkInvoiceBuilder {
             client,
             invoices: vec![],
@@ -35,16 +35,13 @@ impl<'mpesa, Env: ApiEnvironment> BulkInvoiceBuilder<'mpesa, Env> {
     }
 
     /// Adds a single `invoice`
-    pub fn invoice(mut self, invoice: Invoice<'mpesa>) -> BulkInvoiceBuilder<'mpesa, Env> {
+    pub fn invoice(mut self, invoice: Invoice<'mpesa>) -> BulkInvoiceBuilder<'mpesa> {
         self.invoices.push(invoice);
         self
     }
 
     /// Adds multiple `invoices`
-    pub fn invoices(
-        mut self,
-        mut invoices: Vec<Invoice<'mpesa>>,
-    ) -> BulkInvoiceBuilder<'mpesa, Env> {
+    pub fn invoices(mut self, mut invoices: Vec<Invoice<'mpesa>>) -> BulkInvoiceBuilder<'mpesa> {
         self.invoices.append(&mut invoices);
         self
     }
