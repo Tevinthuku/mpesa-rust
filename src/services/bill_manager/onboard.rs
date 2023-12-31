@@ -47,7 +47,7 @@ pub struct OnboardBuilder<'mpesa> {
 
 impl<'mpesa> OnboardBuilder<'mpesa> {
     /// Creates a new Bill Manager Onboard builder
-    pub fn new(client: &'mpesa Mpesa<Env>) -> OnboardBuilder<'mpesa> {
+    pub fn new(client: &'mpesa Mpesa) -> OnboardBuilder<'mpesa> {
         OnboardBuilder {
             client,
             callback_url: None,

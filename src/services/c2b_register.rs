@@ -42,9 +42,9 @@ pub struct C2bRegisterBuilder<'mpesa> {
     short_code: Option<&'mpesa str>,
 }
 
-impl<'mpesa, Env: ApiEnvironment> C2bRegisterBuilder<'mpesa> {
+impl<'mpesa> C2bRegisterBuilder<'mpesa> {
     /// Creates a new C2B Builder
-    pub fn new(client: &'mpesa Mpesa<Env>) -> C2bRegisterBuilder<'mpesa> {
+    pub fn new(client: &'mpesa Mpesa) -> C2bRegisterBuilder<'mpesa> {
         C2bRegisterBuilder {
             client,
             validation_url: None,

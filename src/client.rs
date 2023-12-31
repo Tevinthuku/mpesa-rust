@@ -208,7 +208,7 @@ impl<'mpesa> Mpesa {
 
     #[cfg(feature = "bill_manager")]
     #[doc = include_str!("../docs/client/bill_manager/cancel_invoice.md")]
-    pub fn cancel_invoice(&'mpesa self) -> CancelInvoiceBuilder<'mpesa, Env> {
+    pub fn cancel_invoice(&'mpesa self) -> CancelInvoiceBuilder<'mpesa> {
         CancelInvoiceBuilder::new(self)
     }
 
@@ -294,7 +294,7 @@ impl<'mpesa> Mpesa {
     /// Sends a request to the Safaricom API
     /// This method is used by all the builders to send requests to the
     /// Safaricom API
-    pub(crate) async fn send<Req, Res>(&self, req: Request<'_, Req>) -> MpesaResult<Res>
+    pub(crate) async fn send<Req, Res>(&self, req: Request<Req>) -> MpesaResult<Res>
     where
         Req: Serialize + Send,
         Res: DeserializeOwned,

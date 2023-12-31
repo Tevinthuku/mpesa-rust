@@ -3,7 +3,6 @@
 use serde::{Deserialize, Serialize};
 
 use crate::constants::{CommandId, IdentifierTypes};
-use crate::environment::ApiEnvironment;
 use crate::{Mpesa, MpesaError, MpesaResult};
 
 const ACCOUNT_BALANCE_URL: &str = "mpesa/accountbalance/v1/query";
@@ -52,7 +51,7 @@ pub struct AccountBalanceBuilder<'mpesa> {
     result_url: Option<&'mpesa str>,
 }
 
-impl<'mpesa, Env: ApiEnvironment> AccountBalanceBuilder<'mpesa> {
+impl<'mpesa> AccountBalanceBuilder<'mpesa> {
     /// Creates a new `AccountBalanceBuilder`.
     /// Requires an `initiator_name`, the credential/ username used to authenticate the transaction request
     pub fn new(

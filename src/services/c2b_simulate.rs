@@ -50,9 +50,9 @@ pub struct C2bSimulateBuilder<'mpesa> {
     short_code: Option<&'mpesa str>,
 }
 
-impl<'mpesa, Env: ApiEnvironment> C2bSimulateBuilder<'mpesa> {
+impl<'mpesa> C2bSimulateBuilder<'mpesa> {
     /// Creates a new C2B Simulate builder
-    pub fn new(client: &'mpesa Mpesa<Env>) -> C2bSimulateBuilder<'mpesa> {
+    pub fn new(client: &'mpesa Mpesa) -> C2bSimulateBuilder<'mpesa> {
         C2bSimulateBuilder {
             client,
             command_id: None,

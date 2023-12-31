@@ -54,7 +54,7 @@ pub struct TransactionStatusBuilder<'mpesa> {
     occasion: Option<&'mpesa str>,
 }
 
-impl<'mpesa, Env: ApiEnvironment> TransactionStatusBuilder<'mpesa> {
+impl<'mpesa> TransactionStatusBuilder<'mpesa> {
     /// Creates new `TransactionStatusBuilder`
     pub fn new(client: &'mpesa Mpesa, initiator: &'mpesa str) -> TransactionStatusBuilder<'mpesa> {
         TransactionStatusBuilder {

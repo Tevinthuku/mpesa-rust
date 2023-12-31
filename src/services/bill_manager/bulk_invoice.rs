@@ -21,11 +21,11 @@ pub struct BulkInvoiceResponse {
 
 #[derive(Debug)]
 pub struct BulkInvoiceBuilder<'mpesa> {
-    client: &'mpesa Mpesa<Env>,
+    client: &'mpesa Mpesa,
     invoices: Vec<Invoice<'mpesa>>,
 }
 
-impl<'mpesa, Env: ApiEnvironment> BulkInvoiceBuilder<'mpesa> {
+impl<'mpesa> BulkInvoiceBuilder<'mpesa> {
     /// Creates a new Bill Manager Bulk Invoice builder
     pub fn new(client: &'mpesa Mpesa) -> BulkInvoiceBuilder<'mpesa> {
         BulkInvoiceBuilder {

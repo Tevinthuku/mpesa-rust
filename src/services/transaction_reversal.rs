@@ -57,10 +57,10 @@ pub struct TransactionReversalBuilder<'mpesa> {
     amount: Option<f64>,
 }
 
-impl<'mpesa, Env: ApiEnvironment> TransactionReversalBuilder<'mpesa> {
+impl<'mpesa> TransactionReversalBuilder<'mpesa> {
     /// Creates new `TransactionReversalBuilder`
     pub fn new(
-        client: &'mpesa Mpesa<Env>,
+        client: &'mpesa Mpesa,
         initiator: &'mpesa str,
     ) -> TransactionReversalBuilder<'mpesa> {
         TransactionReversalBuilder {

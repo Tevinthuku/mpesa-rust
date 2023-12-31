@@ -43,7 +43,7 @@ pub struct ReconciliationBuilder<'mpesa> {
     transaction_id: Option<&'mpesa str>,
 }
 
-impl<'mpesa, Env: ApiEnvironment> ReconciliationBuilder<'mpesa> {
+impl<'mpesa> ReconciliationBuilder<'mpesa> {
     /// Creates a new Bill Manager Reconciliation Builder
     pub fn new(client: &'mpesa Mpesa) -> ReconciliationBuilder<'mpesa> {
         ReconciliationBuilder {

@@ -22,7 +22,7 @@ pub struct SingleInvoiceResponse {
 
 #[derive(Debug)]
 pub struct SingleInvoiceBuilder<'mpesa> {
-    client: &'mpesa Mpesa<Env>,
+    client: &'mpesa Mpesa,
     amount: Option<f64>,
     account_reference: Option<&'mpesa str>,
     billed_full_name: Option<&'mpesa str>,
