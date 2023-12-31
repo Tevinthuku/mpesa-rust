@@ -1,4 +1,4 @@
-use std::cell::RefCell;
+use std::{borrow::Borrow, cell::RefCell, sync::Arc};
 
 use cached::Cached;
 use openssl::base64;
@@ -26,15 +26,15 @@ const CARGO_PACKAGE_VERSION: &str = env!("CARGO_PKG_VERSION");
 
 /// Mpesa client that will facilitate communication with the Safaricom API
 #[derive(Clone, Debug)]
-pub struct Mpesa<Env: ApiEnvironment> {
+pub struct Mpesa {
     client_key: String,
     client_secret: Secret<String>,
     initiator_password: RefCell<Option<Secret<String>>>,
-    pub(crate) environment: Env,
+    pub(crate) environment: Arc<dyn ApiEnvironment>,
     pub(crate) http_client: HttpClient,
 }
 
-impl<'mpesa, Env: ApiEnvironment> Mpesa<Env> {
+impl<'mpesa> Mpesa {
     /// Constructs a new `Mpesa` client.
     ///
     /// # Example
@@ -57,7 +57,12 @@ impl<'mpesa, Env: ApiEnvironment> Mpesa<Env> {
     /// ```
     /// # Panics
     /// This method can panic if a TLS backend cannot be initialized for the internal http_client
-    pub fn new<S: Into<String>>(client_key: S, client_secret: S, environment: Env) -> Self {
+    pub fn new<S: Into<String>>(
+        client_key: S,
+        client_secret: S,
+        environment: impl ApiEnvironment,
+    ) -> Self {
+        let environment = Arc::new(environment);
         let http_client = HttpClient::builder()
             .connect_timeout(std::time::Duration::from_millis(10_000))
             .user_agent(format!("mpesa-rust@{CARGO_PACKAGE_VERSION}"))
@@ -77,10 +82,10 @@ impl<'mpesa, Env: ApiEnvironment> Mpesa<Env> {
     /// Gets the initiator password
     /// If `None`, the default password is `"Safcom496!"`
     pub(crate) fn initiator_password(&'mpesa self) -> String {
-        let Some(p) = &*self.initiator_password.borrow() else {
-            return DEFAULT_INITIATOR_PASSWORD.to_owned();
-        };
-        p.expose_secret().into()
+        self.initiator_password
+            .borrow()
+            .map(|password| password.expose_secret().into())
+            .unwrap_or(DEFAULT_INITIATOR_PASSWORD.to_owned())
     }
 
     /// Get the client key
@@ -144,10 +149,7 @@ impl<'mpesa, Env: ApiEnvironment> Mpesa<Env> {
         }
 
         // Generate a new access token
-        let new_token = match auth::auth_prime_cache(self).await {
-            Ok(token) => token,
-            Err(e) => return Err(e),
-        };
+        let new_token = auth::auth_prime_cache(self).await?;
 
         // Double-check if the access token is cached by another thread
         if let Some(token) = AUTH.lock().await.cache_get(&self.client_key) {
@@ -164,7 +166,7 @@ impl<'mpesa, Env: ApiEnvironment> Mpesa<Env> {
 
     #[cfg(feature = "b2c")]
     #[doc = include_str!("../docs/client/b2c.md")]
-    pub fn b2c(&'mpesa self, initiator_name: &'mpesa str) -> B2cBuilder<'mpesa, Env> {
+    pub fn b2c(&self, initiator_name: &str) -> B2cBuilder<'mpesa> {
         B2cBuilder::new(self, initiator_name)
     }
 
