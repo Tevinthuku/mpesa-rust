@@ -4,7 +4,7 @@ use serde::{Deserialize, Serialize};
 
 use crate::client::Mpesa;
 use crate::constants::ResponseType;
-use crate::environment::ApiEnvironment;
+
 use crate::errors::{MpesaError, MpesaResult};
 
 const C2B_REGISTER_URL: &str = "mpesa/c2b/v1/registerurl";

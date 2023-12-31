@@ -5,7 +5,7 @@ use serde::Deserialize;
 
 use crate::client::Mpesa;
 use crate::constants::{Invoice, InvoiceItem};
-use crate::environment::ApiEnvironment;
+
 use crate::errors::{MpesaError, MpesaResult};
 
 const BILL_MANAGER_SINGLE_INVOICE_API_URL: &str = "v1/billmanager-invoice/single-invoicing";

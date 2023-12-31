@@ -4,7 +4,7 @@ use chrono::prelude::{DateTime, Utc};
 use serde::{Deserialize, Serialize};
 
 use crate::client::Mpesa;
-use crate::environment::ApiEnvironment;
+
 use crate::errors::{MpesaError, MpesaResult};
 
 const BILL_MANAGER_RECONCILIATION_API_URL: &str = "v1/billmanager-invoice/reconciliation";

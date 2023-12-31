@@ -14,7 +14,7 @@ const AUTHENTICATION_URL: &str = "/oauth/v1/generate?grant_type=client_credentia
     convert = r#"{ format!("{}", client.client_key()) }"#
 )]
 pub(crate) async fn auth(client: &Mpesa) -> MpesaResult<String> {
-    let url = format!("{}{}", client.environment.base_url(), AUTHENTICATION_URL);
+    let url = format!("{}{}", client.environment.as_ref().base_url(), AUTHENTICATION_URL);
 
     let response = client
         .http_client

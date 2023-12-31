@@ -4,7 +4,7 @@ use serde::Deserialize;
 
 use crate::client::Mpesa;
 use crate::constants::Invoice;
-use crate::environment::ApiEnvironment;
+
 use crate::errors::{MpesaError, MpesaResult};
 
 const BILL_MANAGER_BULK_INVOICE_API_URL: &str = "v1/billmanager-invoice/bulk-invoicing";

@@ -2,7 +2,7 @@
 
 use serde::{Deserialize, Serialize};
 
-use crate::environment::ApiEnvironment;
+
 use crate::{CommandId, Mpesa, MpesaError, MpesaResult};
 
 const B2C_URL: &str = "mpesa/b2c/v1/paymentrequest";

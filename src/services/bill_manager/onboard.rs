@@ -4,7 +4,7 @@ use serde::{Deserialize, Serialize};
 
 use crate::client::Mpesa;
 use crate::constants::SendRemindersTypes;
-use crate::environment::ApiEnvironment;
+
 use crate::errors::{MpesaError, MpesaResult};
 
 const BILL_MANAGER_ONBOARD_API_URL: &str = "v1/billmanager-invoice/optin";

@@ -2,7 +2,7 @@
 
 use serde::{Deserialize, Serialize};
 
-use crate::{ApiEnvironment, CommandId, IdentifierTypes, Mpesa, MpesaError, MpesaResult};
+use crate::{CommandId, IdentifierTypes, Mpesa, MpesaError, MpesaResult};
 
 const TRANSACTION_STATUS_URL: &str = "mpesa/transactionstatus/v1/query";
 

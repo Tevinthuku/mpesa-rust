@@ -3,7 +3,7 @@
 use serde::{Deserialize, Serialize};
 
 use crate::client::Mpesa;
-use crate::environment::ApiEnvironment;
+
 use crate::errors::MpesaResult;
 
 const BILL_MANAGER_CANCEL_INVOICE_API_URL: &str = "v1/billmanager-invoice/cancel-single-invoice";

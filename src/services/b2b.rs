@@ -4,7 +4,6 @@ use serde::{Deserialize, Serialize};
 
 use crate::client::Mpesa;
 use crate::constants::{CommandId, IdentifierTypes};
-use crate::environment::ApiEnvironment;
 use crate::errors::{MpesaError, MpesaResult};
 
 const B2B_URL: &str = "mpesa/b2b/v1/paymentrequest";

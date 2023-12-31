@@ -10,14 +10,14 @@ use serde::de::DeserializeOwned;
 use serde::Serialize;
 
 use crate::auth::AUTH;
-use crate::environment::ApiEnvironment;
+
 use crate::services::{
     AccountBalanceBuilder, B2bBuilder, B2cBuilder, BulkInvoiceBuilder, C2bRegisterBuilder,
     C2bSimulateBuilder, CancelInvoiceBuilder, DynamicQR, DynamicQRBuilder,
     MpesaExpressRequestBuilder, OnboardBuilder, OnboardModifyBuilder, ReconciliationBuilder,
     SingleInvoiceBuilder, TransactionReversalBuilder, TransactionStatusBuilder,
 };
-use crate::{auth, MpesaResult};
+use crate::{ApiEnvironment, auth, MpesaResult};
 
 /// Source: [test credentials](https://developer.safaricom.co.ke/test_credentials)
 const DEFAULT_INITIATOR_PASSWORD: &str = "Safcom496!";

@@ -4,7 +4,7 @@ use serde::{Deserialize, Serialize};
 
 use crate::client::Mpesa;
 use crate::constants::CommandId;
-use crate::environment::ApiEnvironment;
+
 use crate::errors::{MpesaError, MpesaResult};
 
 const C2B_SIMULATE_URL: &str = "mpesa/c2b/v1/simulate";

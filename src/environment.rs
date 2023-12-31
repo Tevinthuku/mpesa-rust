@@ -11,6 +11,7 @@
 //! the Safaricom API [docs](https://developer.safaricom.co.ke/docs?javascript#security-credentials).
 
 use std::convert::TryFrom;
+use std::fmt::Debug;
 use std::str::FromStr;
 
 use crate::MpesaError;
@@ -28,7 +29,7 @@ pub enum Environment {
 
 /// Expected behavior of an `Mpesa` client environment
 /// This abstraction exists to make it possible to mock the MPESA api server for tests
-pub trait ApiEnvironment: Clone {
+pub trait ApiEnvironment: Clone + Debug {
     fn base_url(&self) -> &str;
     fn get_certificate(&self) -> &str;
 }
@@ -46,7 +47,7 @@ impl TryFrom<&str> for Environment {
 
     fn try_from(v: &str) -> Result<Self, Self::Error> {
         let v = v.to_lowercase();
-        match &v {
+        match v.as_str() {
             "production" => Ok(Self::Production),
             "sandbox" => Ok(Self::Sandbox),
             _ => Err(MpesaError::Message(
